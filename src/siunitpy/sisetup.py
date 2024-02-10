@@ -1,7 +1,8 @@
 """sisetup
 
 """
-from siunitpy.unit import _unit
+import warnings
+from . unit import _unit
 
 
 class sisetup():
@@ -10,7 +11,9 @@ class sisetup():
     """
 
     def __init__(self, inter_unit_product=r"\,", per_mode="power",
-                 per_symbol="/", bracket_unit_denominator=True):
+                 per_symbol="/", bracket_unit_denominator=True,
+                 per_symbol_script_correction=r"\!", sticky_per=False,
+                 parse_units=True, unit_font_command=r"\mathrm"):
         """
         
         """
@@ -18,6 +21,10 @@ class sisetup():
         self.per_symbol = per_symbol
         self.inter_unit_product = inter_unit_product
         self.bracket_unit_denominator = bracket_unit_denominator
+        self.per_symbol_script_correction = per_symbol_script_correction
+        self.sticky_per = sticky_per
+        self.parse_units = parse_units
+        self.unit_font_command = unit_font_command
 
 
     @property
@@ -37,8 +44,9 @@ class sisetup():
         elif per_mode == "power-positive-first":
             self._per_mode = "power-positive-first"
         else:
-            raise ValueError("per_mode must be either 'power', 'fraction' "
-                             "or 'symbol'.")
+            raise ValueError("per_mode must be either 'power', 'fraction', "
+                             "'power-positive-first', 'symbol' or "
+                             "'single-symbol'.")
 
 
     @property
@@ -54,6 +62,18 @@ class sisetup():
 
 
     @property
+    def per_symbol_script_correction(self):
+        return self._per_symbol_script_correction
+
+    @per_symbol_script_correction.setter
+    def per_symbol_script_correction(self, per_symbol_script_correction):
+        if isinstance(per_symbol_script_correction, str):
+            self._per_symbol_script_correction = per_symbol_script_correction
+        else:
+            raise TypeError("per_symbol_script_correction must be a string.")
+
+
+    @property
     def bracket_unit_denominator(self):
         return self._bracket_unit_denominator
 
@@ -63,6 +83,33 @@ class sisetup():
             self._bracket_unit_denominator = bracket_unit_denominator
         else:
             raise TypeError("bracket_unit_denominator must be a boolean.")
+
+
+    @property
+    def sticky_per(self):
+        return self._sticky_per
+
+    @sticky_per.setter
+    def sticky_per(self, sticky_per):
+        if isinstance(sticky_per, bool):
+            if sticky_per:
+                warnings.warn("sticky_per is not implemented yet.")
+            else:
+                self._sticky_per = sticky_per
+        else:
+            raise TypeError("sticky_per must be a boolean.")
+
+
+    @property
+    def parse_units(self):
+        return self._parse_units
+
+    @parse_units.setter
+    def parse_units(self, parse_units):
+        if isinstance(parse_units, bool):
+            self._parse_units = parse_units
+        else:
+            raise TypeError("parse_units must be a boolean.")
 
 
     @property
@@ -77,6 +124,18 @@ class sisetup():
             raise TypeError("inter_unit_product must be a string.")
 
 
+    @property
+    def unit_font_command(self):
+        return self._unit_font_command
+
+    @unit_font_command.setter
+    def unit_font_command(self, unit_font_command):
+        if isinstance(unit_font_command, str):
+            self._unit_font_command = unit_font_command
+        else:
+            raise TypeError("unit_font_command must be a string.")
+
+
     def unit(self, unit):
         """Returns the LaTeX representation of the given unit.
 
@@ -84,16 +143,17 @@ class sisetup():
         if not isinstance(unit, str):
             raise TypeError("unit must be a string.")
 
+        if not self.parse_units:
+            return unit
+
         unit = unit.split(";")
 
-        #for i in range(len(unit)):
-        #    unit[i] = _unit(unit[i])
-
-        tex_str = ""
         if self.per_mode != "power":
             # If per_mode is fraction add \frac{ 
             if self.per_mode == "fraction":
                 tex_str = r"\frac{"
+            else:
+                tex_str = ""
 
             # Add all units to str with positive power
             count_pos = 0
@@ -112,6 +172,8 @@ class sisetup():
                 tex_str += "}{"
             elif self.per_mode in ["symbol", "single-symbol"]:
                 tex_str = tex_str[:-len(self.inter_unit_product)]
+                if tex_str[-2].isdigit():
+                    tex_str += self.per_symbol_script_correction
                 tex_str += self.per_symbol
                 if self.bracket_unit_denominator:
                     tex_str += "("

@@ -10,195 +10,195 @@ class _unit():
     """
     units = {
 # SI base units
-        "ampere": r"\text{A}",
-        "candela": r"\text{cd}",
-        "kelvin": r"\text{K}",
-        "kilogram": r"\text{kg}",
-        "metre": r"\text{m}",
-        "mole": r"\text{mol}",
-        "second": r"\text{s}",
+        "ampere": "A",
+        "candela": "cd",
+        "kelvin": "K",
+        "kilogram": "kg",
+        "metre": "m",
+        "mole": "mol",
+        "second": "s",
 # SI derived units
-        "becquerel": r"\text{Bq}",
-        "degreeCelsius": r"\text{◦C}",
-        "coulomb": r"\text{C}",
-        "farad": r"\text{F}",
-        "gray": r"\text{Gy}",
-        "hertz": r"\text{Hz}",
-        "henry": r"\text{H}",
-        "joule": r"\text{J}",
-        "lumen": r"\text{lm}",
-        "katal": r"\text{kat}",
-        "lux": r"\text{lx}",
-        "ohm": r"\text{Ω}",
-        "pascal": r"\text{Pa}",
-        "radian": r"\text{rad}",
-        "siemens": r"\text{S}",
-        "sievert": r"\text{Sv}",
-        "steradian": r"\text{sr}",
-        "tesla": r"\text{T}",
-        "volt": r"\text{V}",
-        "watt": r"\text{W}",
-        "weber": r"\text{Wb}",
+        "becquerel": "Bq",
+        "degreeCelsius": "◦C",
+        "coulomb": "C",
+        "farad": "F",
+        "gray": "Gy",
+        "hertz": "Hz",
+        "henry": "H",
+        "joule": "J",
+        "lumen": "lm",
+        "katal": "kat",
+        "lux": "lx",
+        "ohm": "Ω",
+        "pascal": "Pa",
+        "radian": "rad",
+        "siemens": "S",
+        "sievert": "Sv",
+        "steradian": "sr",
+        "tesla": "T",
+        "volt": "V",
+        "watt": "W",
+        "weber": "Wb",
 # Non-SI units accepted for use with the SI
-        "astronomicalunit": r"\text{au}",
-        "bel": r"\text{B}",
-        "dalton": r"\text{Da}",
-        "day": r"\text{d}",
-        "decibel": r"\text{dB}",
-        "degree": r"\text{◦}",
-        "electronvolt": r"\text{eV}",
-        "hectare": r"\text{ha}",
-        "hour": r"\text{h}",
-        "litre": r"\text{L}",
-        "liter": r"\text{L}",
-        "arcminute": r"^\prime",
-        "minute": r"\text{min}",
-        "arcsecond": r"^{\prime\prime}",
-        "neper": r"\text{Np}",
-        "tonne": r"\text{t}",
+        "astronomicalunit": "au",
+        "bel": "B",
+        "dalton": "Da",
+        "day": "d",
+        "decibel": "dB",
+        "degree": "◦",
+        "electronvolt": "eV",
+        "hectare": "ha",
+        "hour": "h",
+        "litre": "L",
+        "liter": "L",
+        "arcminute": "'",
+        "minute": "min",
+        "arcsecond": "''",
+        "neper": "Np",
+        "tonne": "t",
     }
 
     si_prefixes = {
-        "quecto": r"\text{q}",  # −30
-        "ronto": r"\text{r}",  # −27
-        "yocto": r"\text{y}",  # −24
-        "zepto": r"\text{z}",  # −21
-        "atto": r"\text{a}",  # −18
-        "femto": r"\text{f}",  # −15
-        "pico": r"\text{p}",  # −12
-        "nano": r"\text{n}",  # −9
-        "micro": r"\text{µ}",  # −6
-        "milli": r"\text{m}",  # −3
-        "centi": r"\text{c}",  # −2
-        "deci": r"\text{d}",  # −1
-        "deca": r"\text{da}",  # 1
-        "hecto": r"\text{h}",  # 2
-        "kilo": r"\text{k}",  # 3
-        "mega": r"\text{M}",  # 6
-        "giga": r"\text{G}",  # 9
-        "tera": r"\text{T}",  # 12
-        "peta": r"\text{P}",  # 15
-        "exa": r"\text{E}",  # 18
-        "zetta": r"\text{Z}",  # 21
-        "yotta": r"\text{Y}",  # 24
-        "ronna": r"\text{R}",  # 27
-        "quetta": r"\text{Q}",  # 30
+        "quecto": "q",  # −30
+        "ronto": "r",  # −27
+        "yocto": "y",  # −24
+        "zepto": "z",  # −21
+        "atto": "a",  # −18
+        "femto": "f",  # −15
+        "pico": "p",  # −12
+        "nano": "n",  # −9
+        "micro": "µ",  # −6
+        "milli": "m",  # −3
+        "centi": "c",  # −2
+        "deci": "d",  # −1
+        "deca": "da",  # 1
+        "hecto": "h",  # 2
+        "kilo": "k",  # 3
+        "mega": "M",  # 6
+        "giga": "G",  # 9
+        "tera": "T",  # 12
+        "peta": "P",  # 15
+        "exa": "E",  # 18
+        "zetta": "Z",  # 21
+        "yotta": "Y",  # 24
+        "ronna": "R",  # 27
+        "quetta": "Q",  # 30
     }
 
     abbreviations = {
-        "fg": r"\text{fg}",  # femtogram
-        "pg": r"\text{pg}",  # picogram
-        "ng": r"\text{ng}",  # nanogram
-        "ug": r"\text{µg}",  # microgram
-        "mg": r"\text{mg}",  # milligram
-        "g": r"\text{g}",  # gram
-        "kg": r"\text{kg}",  # kilogram
-        "pm": r"\text{pm}",  # picometre
-        "nm": r"\text{nm}",  # nanometre
-        "um": r"\text{µm}",  # micrometre
-        "mm": r"\text{mm}",  # millimetre
-        "cm": r"\text{cm}",  # centimetre
-        "dm": r"\text{dm}",  # decimetre
-        "m": r"\text{m}",  # metre
-        "km": r"\text{km}",  # kilometre
-        "as": r"\text{as}",  # attosecond
-        "fs": r"\text{fs}",  # femtosecond
-        "ps": r"\text{ps}",  # picosecond
-        "ns": r"\text{ns}",  # nanosecond
-        "us": r"\text{µs}",  # microsecond
-        "ms": r"\text{ms}",  # millisecond
-        "s": r"\text{s}",  # second
-        "fmol": r"\text{fmol}",  # femtomole
-        "pmol": r"\text{pmol}",  # picomole
-        "nmol": r"\text{nmol}",  # nanomole
-        "umol": r"\text{µmol}",  # micromole
-        "mmol": r"\text{mmol}",  # millimole
-        "mol": r"\text{mol}",  # mole
-        "kmol": r"\text{kmol}",  # kilomole
-        "pA": r"\text{pA}",  # picoampere
-        "nA": r"\text{nA}",  # nanoampere
-        "uA": r"\text{µA}",  # microampere
-        "mA": r"\text{mA}",  # milliampere
-        "A": r"\text{A}",  # ampere
-        "kA": r"\text{kA}",  # kiloampere
-        "ul": r"\text{µL}",  # microlitre
-        "ml": r"\text{mL}",  # millilitre
-        "l": r"\text{L}",  # litre
-        "hl": r"\text{hL}",  # hectolitre
-        "uL": r"\text{µL}",  # microliter
-        "mL": r"\text{mL}",  # milliliter
-        "L": r"\text{L}",  # liter
-        "hL": r"\text{hL}",  # hectoliter
-        "mHz": r"\text{mHz}",  # millihertz
-        "Hz": r"\text{Hz}",  # hertz
-        "kHz": r"\text{kHz}",  # kilohertz
-        "MHz": r"\text{MHz}",  # megahertz
-        "GHz": r"\text{GHz}",  # gigahertz
-        "THz": r"\text{THz}",  # terahertz
-        "mN": r"\text{mN}",  # millinewton
-        "N": r"\text{N}",  # newton
-        "kN": r"\text{kN}",  # kilonewton
-        "MN": r"\text{MN}",  # meganewton
-        "Pa": r"\text{Pa}",  # pascal
-        "kPa": r"\text{kPa}",  # kilopascal
-        "MPa": r"\text{MPa}",  # megapascal
-        "GPa": r"\text{GPa}",  # gigapascal
-        "mohm": r"\text{mΩ}",  # milliohm
-        "kohm": r"\text{kΩ}",  # kilohm
-        "Mohm": r"\text{MΩ}",  # megohm
-        "pV": r"\text{pV}",  # picovolt
-        "nV": r"\text{nV}",  # nanovolt
-        "uV": r"\text{µV}",  # microvolt
-        "mV": r"\text{mV}",  # millivolt
-        "V": r"\text{V}",  # volt
-        "kV": r"\text{kV}",  # kilovolt
-        "W": r"\text{W}",  # watt
-        "nW": r"\text{nW}",  # nanowatt
-        "uW": r"\text{µW}",  # microwatt
-        "mW": r"\text{mW}",  # milliwatt
-        "kW": r"\text{kW}",  # kilowatt
-        "MW": r"\text{MW}",  # megawatt
-        "GW": r"\text{GW}",  # gigawatt
-        "J": r"\text{J}",  # joule
-        "uJ": r"\text{µJ}",  # microjoule
-        "mJ": r"\text{mJ}",  # millijoule
-        "kJ": r"\text{kJ}",  # kilojoule
-        "eV": r"\text{eV}",  # electronvolt
-        "meV": r"\text{meV}",  # millielectronvolt
-        "keV": r"\text{keV}",  # kiloelectronvolt
-        "MeV": r"\text{MeV}",  # megaelectronvolt
-        "GeV": r"\text{GeV}",  # gigaelectronvolt
-        "TeV": r"\text{TeV}",  # teraelectronvolt
-        "kWh": r"\text{kWh}",  # kilowatt hour
-        "F": r"\text{F}",  # farad
-        "fF": r"\text{fF}",  # femtofarad
-        "pF": r"\text{pF}",  # picofarad
-        "nF": r"\text{nF}",  # nanofarad
-        "uF": r"\text{µF}",  # microfarad
-        "mF": r"\text{mF}",  # millifarad
-        "H": r"\text{H}",  # henry
-        "fH": r"\text{fH}",  # femtohenry
-        "pH": r"\text{pH}",  # picohenry
-        "nH": r"\text{nH}",  # nanohenry
-        "mH": r"\text{mH}",  # millihenry
-        "uH": r"\text{µH}",  # microhenry
-        "C": r"\text{C}",  # coulomb
-        "nC": r"\text{nC}",  # nanocoulomb
-        "mC": r"\text{mC}",  # millicoulomb
-        "uC": r"\text{µC}",  # microcoulomb
-        "T": r"\text{T}",  # tesla
-        "mT": r"\text{mT}",  # millitesla
-        "uT": r"\text{µT}",  # microtesla
-        "K": r"\text{K}",  # kelvin
-        "dB": r"\text{dB}",  # decibel
+        "fg": "fg",  # femtogram
+        "pg": "pg",  # picogram
+        "ng": "ng",  # nanogram
+        "ug": "µg",  # microgram
+        "mg": "mg",  # milligram
+        "g": "g",  # gram
+        "kg": "kg",  # kilogram
+        "pm": "pm",  # picometre
+        "nm": "nm",  # nanometre
+        "um": "µm",  # micrometre
+        "mm": "mm",  # millimetre
+        "cm": "cm",  # centimetre
+        "dm": "dm",  # decimetre
+        "m": "m",  # metre
+        "km": "km",  # kilometre
+        "as": "as",  # attosecond
+        "fs": "fs",  # femtosecond
+        "ps": "ps",  # picosecond
+        "ns": "ns",  # nanosecond
+        "us": "µs",  # microsecond
+        "ms": "ms",  # millisecond
+        "s": "s",  # second
+        "fmol": "fmol",  # femtomole
+        "pmol": "pmol",  # picomole
+        "nmol": "nmol",  # nanomole
+        "umol": "µmol",  # micromole
+        "mmol": "mmol",  # millimole
+        "mol": "mol",  # mole
+        "kmol": "kmol",  # kilomole
+        "pA": "pA",  # picoampere
+        "nA": "nA",  # nanoampere
+        "uA": "µA",  # microampere
+        "mA": "mA",  # milliampere
+        "A": "A",  # ampere
+        "kA": "kA",  # kiloampere
+        "ul": "µL",  # microlitre
+        "ml": "mL",  # millilitre
+        "l": "L",  # litre
+        "hl": "hL",  # hectolitre
+        "uL": "µL",  # microliter
+        "mL": "mL",  # milliliter
+        "L": "L",  # liter
+        "hL": "hL",  # hectoliter
+        "mHz": "mHz",  # millihertz
+        "Hz": "Hz",  # hertz
+        "kHz": "kHz",  # kilohertz
+        "MHz": "MHz",  # megahertz
+        "GHz": "GHz",  # gigahertz
+        "THz": "THz",  # terahertz
+        "mN": "mN",  # millinewton
+        "N": "N",  # newton
+        "kN": "kN",  # kilonewton
+        "MN": "MN",  # meganewton
+        "Pa": "Pa",  # pascal
+        "kPa": "kPa",  # kilopascal
+        "MPa": "MPa",  # megapascal
+        "GPa": "GPa",  # gigapascal
+        "mohm": "mΩ",  # milliohm
+        "kohm": "kΩ",  # kilohm
+        "Mohm": "MΩ",  # megohm
+        "pV": "pV",  # picovolt
+        "nV": "nV",  # nanovolt
+        "uV": "µV",  # microvolt
+        "mV": "mV",  # millivolt
+        "V": "V",  # volt
+        "kV": "kV",  # kilovolt
+        "W": "W",  # watt
+        "nW": "nW",  # nanowatt
+        "uW": "µW",  # microwatt
+        "mW": "mW",  # milliwatt
+        "kW": "kW",  # kilowatt
+        "MW": "MW",  # megawatt
+        "GW": "GW",  # gigawatt
+        "J": "J",  # joule
+        "uJ": "µJ",  # microjoule
+        "mJ": "mJ",  # millijoule
+        "kJ": "kJ",  # kilojoule
+        "eV": "eV",  # electronvolt
+        "meV": "meV",  # millielectronvolt
+        "keV": "keV",  # kiloelectronvolt
+        "MeV": "MeV",  # megaelectronvolt
+        "GeV": "GeV",  # gigaelectronvolt
+        "TeV": "TeV",  # teraelectronvolt
+        "kWh": "kWh",  # kilowatt hour
+        "F": "F",  # farad
+        "fF": "fF",  # femtofarad
+        "pF": "pF",  # picofarad
+        "nF": "nF",  # nanofarad
+        "uF": "µF",  # microfarad
+        "mF": "mF",  # millifarad
+        "H": "H",  # henry
+        "fH": "fH",  # femtohenry
+        "pH": "pH",  # picohenry
+        "nH": "nH",  # nanohenry
+        "mH": "mH",  # millihenry
+        "uH": "µH",  # microhenry
+        "C": "C",  # coulomb
+        "nC": "nC",  # nanocoulomb
+        "mC": "mC",  # millicoulomb
+        "uC": "µC",  # microcoulomb
+        "T": "T",  # tesla
+        "mT": "mT",  # millitesla
+        "uT": "µT",  # microtesla
+        "K": "K",  # kelvin
+        "dB": "dB",  # decibel
     }
 
 
-    def __init__(self, unit):
-        self.tex_str, self.power = self._parse_unit(unit)
+    def __init__(self, unit, unit_font_command=r"\mathrm"):
+        self.tex_str, self.power = self._parse_unit(unit, unit_font_command)
 
 
-    def _parse_unit(self, unit):
+    def _parse_unit(self, unit, unit_font_command):
         if not isinstance(unit, str):
             raise TypeError("unit must be a string.")
         if len(unit) == 0:
@@ -236,7 +236,7 @@ class _unit():
                 _abbreviations.append(u)
             else:
                 try:
-                    _powers.append(int(u))
+                    _powers.append(float(u))
                 except ValueError:
                     raise ValueError(u + " could not be parsed.")
 
@@ -253,13 +253,18 @@ class _unit():
         elif len(_powers) > 1:
             raise ValueError("Only one power per ';' allowed.")
         
+        tex_str = unit_font_command + "{"
         if len(_prefixes) == 1:
-            tex_str = self.si_prefixes[_prefixes[0]]
+            tex_str += self.si_prefixes[_prefixes[0]]
         if len(_abbreviations) == 1:
             tex_str += self.abbreviations[_abbreviations[0]]
         if len(_units) == 1:
             tex_str += self.units[_units[0]]
+        tex_str += "}"
         if len(_powers) == 1:
             power *= _powers[0]
+
+        if int(power) == power:
+            power = int(power)
 
         return tex_str, power
