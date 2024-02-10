@@ -1,5 +1,5 @@
-siunitpy
-========
+siunitx
+=======
 
 |versionshield| |licenseshield|
 
@@ -8,7 +8,3 @@ siunitpy
    :hidden:
 
    reference
-
-
-
-.. _GitHub: https://github.com/exp4-age/agepy

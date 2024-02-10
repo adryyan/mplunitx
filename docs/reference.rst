@@ -1,13 +1,13 @@
 Reference
 =========
 
-All *siunitpy* modules and their classes, functions and attributes are
+All *siunitx* modules and their classes, functions and attributes are
 listed and documented here.
 
-.. currentmodule:: siunitpy
+.. currentmodule:: siunitx
 
 .. autosummary::
    :nosignatures:
    :recursive:
-   :template: siunitpy_module.rst
+   :template: siunitx_module.rst
    :toctree: _reference
