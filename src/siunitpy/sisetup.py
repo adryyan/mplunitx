@@ -2,6 +2,7 @@
 
 """
 import warnings
+from . number import _number
 from . unit import _unit
 
 
@@ -9,14 +10,16 @@ class sisetup():
     """
     
     """
+    per_mode_options = ["power", "fraction", "symbol", "single-symbol",
+                        "power-positive-first"]
+    label_unit_mode_options = ["/", "[]"]
 
     def __init__(self, inter_unit_product=r"\,", per_mode="power",
                  per_symbol="/", bracket_unit_denominator=True,
                  per_symbol_script_correction=r"\!", sticky_per=False,
-                 parse_units=True, unit_font_command=r"\mathrm"):
-        """
-        
-        """
+                 parse_units=True, unit_font_command=r"\mathrm",
+                 label_unit_mode="/"):
+        # options unit
         self.per_mode = per_mode
         self.per_symbol = per_symbol
         self.inter_unit_product = inter_unit_product
@@ -26,6 +29,9 @@ class sisetup():
         self.parse_units = parse_units
         self.unit_font_command = unit_font_command
 
+        # options label
+        self.label_unit_mode = label_unit_mode
+
 
     @property
     def per_mode(self):
@@ -33,16 +39,8 @@ class sisetup():
 
     @per_mode.setter
     def per_mode(self, per_mode):
-        if per_mode is None or per_mode == "power":
-            self._per_mode = "power"
-        elif per_mode == "fraction":
-            self._per_mode = "fraction"
-        elif per_mode == "symbol":
-            self._per_mode = "symbol"
-        elif per_mode == "single-symbol":
-            self._per_mode = "single-symbol"
-        elif per_mode == "power-positive-first":
-            self._per_mode = "power-positive-first"
+        if per_mode in self.per_mode_options:
+            self._per_mode = per_mode
         else:
             raise ValueError("per_mode must be either 'power', 'fraction', "
                              "'power-positive-first', 'symbol' or "
@@ -136,6 +134,26 @@ class sisetup():
             raise TypeError("unit_font_command must be a string.")
 
 
+    @property
+    def label_unit_mode(self):
+        return self._label_unit_mode
+
+    @label_unit_mode.setter
+    def label_unit_mode(self, label_unit_mode):
+        if label_unit_mode in self.label_unit_mode_options:
+            self._per_mode = label_unit_mode
+        else:
+            raise ValueError("label_unit_mode must be on of "
+                             "label_unit_mode_options.")
+
+
+    def num(number):
+        """Returns the LaTeX representation of the given number.
+
+        """
+        number = _number(number)
+        return "$" + number.tex_str + "$"
+
     def unit(self, unit):
         """Returns the LaTeX representation of the given unit.
 
@@ -216,3 +234,28 @@ class sisetup():
                     tex_str += self.inter_unit_product
         
         return "$" + tex_str + "$"
+
+
+    def qty(self, number, unit):
+        """Returns the LaTeX representation of the given quantity.
+
+        """
+        number = self.num(number).replace("$", "")
+        unit = self.unit(unit).replace("$", "")
+
+        return "$" + number + r"\," + unit + "$"
+
+
+    def label(self, var, unit):
+        """Returns the LaTeX representation of the given label.
+
+        """
+        if not isinstance(var, str):
+            raise TypeError("var must be a string.")
+
+        unit = self.unit(unit).replace("$", "")
+
+        if self.label_unit_mode == "/":
+            return var + r"$\;/\;" + unit + "$"
+        elif self.label_unit_mode == "[]":
+            return var + r"\;[" + unit + r"]"
