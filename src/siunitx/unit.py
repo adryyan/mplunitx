@@ -1,6 +1,161 @@
 """Parsing of units.
 
 """
+import warnings
+from typing import Any, Dict, Literal
+
+
+
+class _unit_kw():
+    """
+    
+    """
+    per_mode_options = ["power", "fraction", "symbol", "single-symbol",
+                        "power-positive-first"]
+
+    def __init__(
+        self,
+        inter_unit_product: str = r"\,",
+        per_mode: Literal["power", "fraction", "symbol", "single-symbol",
+                          "power-positive-first"] = "power",
+        per_symbol: str = "/",
+        bracket_unit_denominator: bool = True,
+        per_symbol_script_correction: str = r"\!",
+        sticky_per: bool = False,
+        parse_units: bool = True,
+        unit_font_command: str = r"\mathrm"
+    ):
+        # options dictionary
+        self._unit_kw = {}
+
+        # options unit
+        self.per_mode = per_mode
+        self.per_symbol = per_symbol
+        self.inter_unit_product = inter_unit_product
+        self.bracket_unit_denominator = bracket_unit_denominator
+        self.per_symbol_script_correction = per_symbol_script_correction
+        self.sticky_per = sticky_per
+        self.parse_units = parse_units
+        self.unit_font_command = unit_font_command
+
+
+    @property
+    def per_mode(self):
+        return self._unit_kw["per_mode"]
+
+    @per_mode.setter
+    def per_mode(self, val):
+        if val in self.per_mode_options:
+            self._unit_kw["per_mode"] = val
+        else:
+            raise ValueError("per_mode must be one of per_mode_options.")
+
+
+    @property
+    def per_symbol(self):
+        return self._unit_kw["per_symbol"]
+
+    @per_symbol.setter
+    def per_symbol(self, val):
+        if isinstance(val, str):
+            self._unit_kw["per_symbol"] = val
+        else:
+            raise TypeError("per_symbol must be a string.")
+
+
+    @property
+    def per_symbol_script_correction(self):
+        return self._unit_kw["per_symbol_script_correction"]
+
+    @per_symbol_script_correction.setter
+    def per_symbol_script_correction(self, val):
+        if isinstance(val, str):
+            self._unit_kw["per_symbol_script_correction"] = val
+        else:
+            raise TypeError("per_symbol_script_correction must be a string.")
+
+
+    @property
+    def bracket_unit_denominator(self):
+        return self._unit_kw["bracket_unit_denominator"]
+
+    @bracket_unit_denominator.setter
+    def bracket_unit_denominator(self, val):
+        if isinstance(val, bool):
+            self._unit_kw["bracket_unit_denominator"] = val
+        else:
+            raise TypeError("bracket_unit_denominator must be a boolean.")
+
+
+    @property
+    def sticky_per(self):
+        return self._unit_kw["sticky_per"]
+
+    @sticky_per.setter
+    def sticky_per(self, val):
+        if isinstance(val, bool):
+            if val:
+                warnings.warn("sticky_per is not implemented yet.")
+            else:
+                self._unit_kw["sticky_per"] = val
+        else:
+            raise TypeError("sticky_per must be a boolean.")
+
+
+    @property
+    def parse_units(self):
+        return self._unit_kw["parse_units"]
+
+    @parse_units.setter
+    def parse_units(self, val):
+        if isinstance(val, bool):
+            self._unit_kw["parse_units"] = val
+        else:
+            raise TypeError("parse_units must be a boolean.")
+
+
+    @property
+    def inter_unit_product(self):
+        return self._unit_kw["inter_unit_product"]
+
+    @inter_unit_product.setter
+    def inter_unit_product(self, val):
+        if isinstance(val, str):
+            self._unit_kw["inter_unit_product"] = val
+        else:
+            raise TypeError("inter_unit_product must be a string.")
+
+
+    @property
+    def unit_font_command(self):
+        return self._unit_kw["unit_font_command"]
+
+    @unit_font_command.setter
+    def unit_font_command(self, val):
+        if isinstance(val, str):
+            self._unit_kw["unit_font_command"] = val
+        else:
+            raise TypeError("unit_font_command must be a string.")
+
+
+    def __repr__(self):
+        return f"_unit_kw({self._unit_kw})"
+
+
+    def __str__(self):
+        return f"_unit_kw({self._unit_kw})"
+
+
+    def update(self, kw: Dict[str, Any]):
+        """Update the unit_kw options.
+
+        """
+        for k, v in kw.items():
+            if k in self._unit_kw:
+                setattr(self, k, v)
+            else:
+                raise ValueError(f"{k} is not a valid option.")
+
 
 
 class _unit():
@@ -215,9 +370,12 @@ class _unit():
         unit = _remove_values_from_list(unit, "per")
 
         # Count squared and cubic and change power accordingly
-        if "square" in unit:
+        if "squared" in unit:
             power *= 2 * unit.count("squared")
             unit = _remove_values_from_list(unit, "squared")
+        if "cubed" in unit:
+            power *= 3 * unit.count("cubed")
+            unit = _remove_values_from_list(unit, "cubed")
         if "cubic" in unit:
             power *= 3 * unit.count("cubic")
             unit = _remove_values_from_list(unit, "cubic")
