@@ -4,7 +4,7 @@
 from typing import Any, Dict, Literal
 
 from . number import _number
-from . unit import _unit, _unit_kw
+from . unit import _parse_unit, _unit_kw
 
 
 
@@ -18,6 +18,7 @@ class sisetup():
 
     def __init__(
         self,
+        declare_unit: Dict[str, str] = None,
         inter_unit_product: str = r"\,",
         per_mode: Literal["power", "fraction", "symbol", "single-symbol",
                           "power-positive-first"] = "power",
@@ -27,8 +28,18 @@ class sisetup():
         sticky_per: bool = False,
         parse_units: bool = True,
         unit_font_command: str = r"\mathrm",
+        quantity_product: str = r"\,",
         label_unit_mode: Literal["/", "[]"] = "/"
     ):
+        # declare units
+        if declare_unit is not None:
+            if not isinstance(declare_unit, dict):
+                raise TypeError("declare_unit must be a dict.")
+            for k, v in declare_unit.items():
+                if not isinstance(k, str) or not isinstance(v, str):
+                    raise TypeError("declare_unit must be a dict of str.")
+        self.declare_unit = declare_unit
+
         # options unit
         self.unit_kw = _unit_kw(
             inter_unit_product=inter_unit_product,
@@ -41,24 +52,39 @@ class sisetup():
             unit_font_command=unit_font_command
         )
 
+        # options qty
+        self.quantity_product = quantity_product
+
         # options label
         self.label_unit_mode = label_unit_mode
 
 
     @property
-    def label_unit_mode(self):
+    def quantity_product(self) -> str:
+        return self._quantity_product
+
+    @quantity_product.setter
+    def quantity_product(self, val: str):
+        if isinstance(val, str):
+            self._quantity_product = val
+        else:
+            raise ValueError("quantity_product must be a str.")
+
+
+    @property
+    def label_unit_mode(self) -> Literal["/", "[]"]:
         return self._label_unit_mode
 
     @label_unit_mode.setter
-    def label_unit_mode(self, label_unit_mode):
-        if label_unit_mode in self.label_unit_mode_options:
-            self._per_mode = label_unit_mode
+    def label_unit_mode(self, val: Literal["/", "[]"]):
+        if val in self.label_unit_mode_options:
+            self._label_unit_mode = val
         else:
             raise ValueError("label_unit_mode must be on of "
                              "label_unit_mode_options.")
 
 
-    def num(number):
+    def num(number: str) -> str:
         """Returns the LaTeX representation of the given number.
 
         """
@@ -96,11 +122,12 @@ class sisetup():
             # Add all units to str with positive power
             count_pos = 0
             for i, u in enumerate(unit):
-                u = _unit(u)
-                if u.power > 0:
-                    tex_str += u.tex_str
-                    if u.power != 1:
-                        tex_str += "^{" + str(u.power) + "}"
+                utex, power = _parse_unit(
+                    u, user_declared_units=self.declare_unit)
+                if power > 0:
+                    tex_str += utex
+                    if power != 1:
+                        tex_str += "^{" + str(power) + "}"
                     tex_str += kw.inter_unit_product
                     count_pos += 1
 
@@ -119,15 +146,16 @@ class sisetup():
             # Add all units to str with negative power
             count_neg = 0
             for i, u in enumerate(unit):
-                u = _unit(u)
-                if u.power < 0:
-                    tex_str += u.tex_str
+                utex, power = _parse_unit(
+                    u, user_declared_units=self.declare_unit)
+                if power < 0:
+                    tex_str += utex
                     if (kw.per_mode in 
                         ["symbol", "single-symbol", "fraction"]):
-                        if u.power != -1:   
-                            tex_str += "^{" + str(-u.power) + "}"
+                        if power != -1:   
+                            tex_str += "^{" + str(-power) + "}"
                     else:      
-                        tex_str += "^{" + str(u.power) + "}"
+                        tex_str += "^{" + str(power) + "}"
                     tex_str += kw.inter_unit_product
                     count_neg += 1
 
@@ -146,27 +174,44 @@ class sisetup():
                                         and count_neg > 1):
             tex_str = ""
             for i, u in enumerate(unit):
-                u = _unit(u)
-                tex_str += u.tex_str
-                if u.power != 1:
-                    tex_str += "^{" + str(u.power) + "}"
+                utex, power = _parse_unit(
+                    u, user_declared_units=self.declare_unit)
+                tex_str += utex
+                if power != 1:
+                    tex_str += "^{" + str(power) + "}"
                 if i < len(unit) - 1:
                     tex_str += kw.inter_unit_product
         
         return "$" + tex_str + "$"
 
 
-    def qty(self, number, unit):
+    def qty(
+        self,
+        number: str,
+        unit: str,
+        unit_kw: Dict[str, Any] = None,
+        **qty_kw,
+    ) -> str:
         """Returns the LaTeX representation of the given quantity.
 
         """
         number = self.num(number).replace("$", "")
-        unit = self.unit(unit).replace("$", "")
 
-        return "$" + number + r"\," + unit + "$"
+        if unit_kw is None:
+            unit = self.unit(unit).replace("$", "")
+        else:
+            unit = self.unit(unit, **unit_kw).replace("$", "")
+
+        first_unit = unit.find("{") + 1
+        if unit[first_unit] == "'":
+            return "$" + number + unit + "$"
+        elif unit[first_unit] == "◦" and unit[first_unit+1] != "C":
+            return "$" + number + unit + "$"
+
+        return "$" + number + self.quantity_product + unit + "$"
 
 
-    def label(self, var, unit):
+    def label(self, var: str, unit: str) -> str:
         """Returns the LaTeX representation of the given label.
 
         """
