@@ -1,13 +1,13 @@
 Reference
 =========
 
-All *siunitx* modules and their classes, functions and attributes are
+All *mplunitx* modules and their classes, functions and attributes are
 listed and documented here.
 
-.. currentmodule:: siunitx
+.. currentmodule:: mplunitx
 
 .. autosummary::
    :nosignatures:
    :recursive:
-   :template: siunitx_module.rst
+   :template: mplunitx_module.rst
    :toctree: _reference

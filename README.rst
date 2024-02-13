@@ -1,5 +1,5 @@
-siunitx
-=======
+mplunitx
+========
 
 .. image:: https://img.shields.io/badge/version-0.1.0-blue
    :target: https://img.shields.io/badge/version-0.1.0-blue

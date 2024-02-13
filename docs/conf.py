@@ -3,12 +3,12 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-from siunitx import __version__ as version
+from mplunitx import __version__ as version
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "siunitx"
+project = "mplunitx"
 release = f"{version}"
 copyright = "2024, Adrian Peter Krone"
 author = "Adrian Peter Krone"

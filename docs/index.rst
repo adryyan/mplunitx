@@ -1,5 +1,5 @@
-siunitx
-=======
+mplunitx
+========
 
 |versionshield| |licenseshield|
 
