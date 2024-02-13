@@ -40,6 +40,8 @@ templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 numpydoc_show_class_members = False
+numpydoc_show_inherited_class_members = False
+numpydoc_class_members_toctree = True
 numpydoc_xref_param_type = True
 numpydoc_use_plots = True
 
@@ -48,7 +50,7 @@ plot_html_show_source_link = False
 plot_formats = [("hires.png", 300)]
 plot_html_show_formats = False
 
-autosummary_generate = ["reference"]
+autosummary_generate = True #["reference"]
 
 copybutton_prompt_text = ">>> "
 
