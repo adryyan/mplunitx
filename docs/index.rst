@@ -1,5 +1,5 @@
-mplunitx
-========
+Welcome to mplunitx documentation
+=================================
 
 |versionshield| |licenseshield|
 

@@ -1,15 +1,96 @@
-"""sisetup
+"""Hidden module for the sisetup class.
 
 """
-from typing import Any, Dict, Literal
-
 from . number import _number
 from . unit import _parse_unit, _unit_kw
+
+from typing import Any, Dict, Literal
 
 
 
 class sisetup():
-    """
+    """Set up mplunitx with the desired options.
+
+    Creating an instance of the `sisetup` class provides access to the
+    methods `num`, `unit`, `qty`, and `label`.
+    With the parameters a variety of options can be set to customize the
+    output of the methods.
+
+    The set options can be temporarily overwritten in the method calls. 
+
+    Parameters
+    ----------
+    declare_unit : dict, optional
+        Additional units can be declared using this parameter. The keys
+        are the unit names and the values are the LaTeX representation;
+        e.g. ``{"arbitraryunit": r"arb.\,u."}``.
+
+    Attributes
+    ----------
+    declare_unit : dict
+        Dictionary that stores units declared by the user.
+    unit_kw : _unit_kw
+        Instance of `mplunitx.unit._unit_kw` containing the unit
+        formatting options.
+
+    Other Parameters
+    ----------------
+    inter_unit_product : str, default=r"\\\,"
+        Character used to separate units.
+    per_mode : str, default="power"
+        Mode for typesetting units with negative power.
+        Must be one of ``{"power", "fraction", "symbol",
+        "single-symbol", "power-positive-first"}``.
+        ``"power"``: Units are typeset with positive and negative
+        powers. ``"fraction"``: Units are typeset as a fraction using
+        ``\\frac``. ``"symbol"``: Units are typeset with a character
+        between positive and negative powers (Default: ``"/"``, see
+        `per_symbol`). ``"single-symbol"``: Units are typeset like
+        ``"symbol"`` if there is only one unit with negative power.
+        Otherwise powers are used. ``"power-positive-first"``: Units are
+        typeset like ``"power"`` but positive powers are typeset left of
+        negative powers.
+    per_symbol : str, default="/"
+        Character between positive and negative powers when in
+        ``"symbol"`` or ``"single-symbol"`` mode.
+    bracket_unit_denominator : bool, default=True
+        If ``True`` and in ``"symbol"`` mode encloses the units to the
+        right of the symbol in brackets.
+    per_symbol_script_correction : str, default=r"\\\!"
+        If the character before ``per_symbol`` is a power, the space
+        between the power and the symbol is corrected using the given
+        string.
+    sticky_per : bool, default=False
+        Not implemented yet.
+    parse_units : bool, default=True
+        If ``False`` the input string is returned as is.
+    unit_font_command : str, default=r"\\\mathrm"
+        LaTeX command used to typeset units.
+    quantity_product : str, default=r"\\\,"
+        Character used to separate number and unit.
+    label_unit_mode : str, default="/"
+        Must be one of ``{"/", "[]"}``. If ``"/"`` the variable and unit
+        are separated by a forward slash when using the `label` method.
+        If ``"[]"`` the unit is enclosed in square brackets.
+
+    Examples
+    --------
+    Import the module and create an instance of the `sisetup` class:
+
+    >>> from mplunitx import sisetup
+    >>> si = sisetup()
+
+    Use the `label` method to typeset a label:
+
+    >>> si.label("Energy", "mega.eV")
+    'Energy$\\;/\\;\\mathrm{MeV}$'
+
+    And use it to label a matplotlib plot:
+
+    >>> import matplotlib.pyplot as plt
+    >>> plt.plot([100, 200, 300], [1, 2, 3])
+    >>> plt.xlabel(si.label("Measurement duraction", "day"))
+    >>> plt.ylabel(si.label("Integrated luminosity", "per.femto.barn"))
     
     """
     per_mode_options = ["power", "fraction", "symbol", "single-symbol",

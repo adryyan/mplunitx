@@ -1,4 +1,8 @@
-"""Parsing of units.
+"""Available units and prefixes (and helper classes).
+
+This module provides dictionaries containing the available units and
+prefixes. And classes to handle the options for the unit formatting and
+parsing of the imput strings.
 
 """
 import warnings
@@ -7,7 +11,7 @@ from typing import Any, Dict, Literal, Tuple
 
 
 class _unit_kw():
-    """
+    """Handling of the options for the unit formatting.
     
     """
     per_mode_options = ["power", "fraction", "symbol", "single-symbol",

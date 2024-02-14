@@ -29,12 +29,21 @@ extensions = [
     "sphinx.ext.autodoc",
     "numpydoc",
     "sphinx.ext.autosummary",
+    'sphinx_autodoc_typehints',
     "sphinx.ext.mathjax",
     "sphinx_copybutton",
     "matplotlib.sphinxext.plot_directive",
     "IPython.sphinxext.ipython_console_highlighting",
     "nbsphinx",  # https://jupyter-tutorial.readthedocs.io/de/latest/sphinx/nbsphinx.html
 ]
+
+autosummary_imported_members = True
+autosummary_generate = False #["reference"]
+autoclass_content = "class"
+html_show_sourcelink = False
+set_type_checking_flag = True
+nbsphinx_allow_errors = True
+add_module_names = False
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
@@ -49,8 +58,6 @@ plot_include_source = True
 plot_html_show_source_link = False
 plot_formats = [("hires.png", 300)]
 plot_html_show_formats = False
-
-autosummary_generate = True #["reference"]
 
 copybutton_prompt_text = ">>> "
 

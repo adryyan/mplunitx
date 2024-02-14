@@ -3,25 +3,7 @@
 .. currentmodule:: {{ module }}
 
 .. autoclass:: {{ objname }}
-
-   {% block methods %}
-   {% if methods %}
-   .. rubric:: {{ _('Methods') }}
-
-   {% for item in methods %}
-
-   .. automethod:: {{ item }}
-   {%- endfor %}
-   {% endif %}
-   {% endblock %}
-
-   {% block attributes %}
-   {% if attributes %}
-   .. rubric:: {{ _('Attributes') }}
-
-   .. autosummary::
-   {% for item in attributes %}
-      ~{{ name }}.{{ item }}
-   {%- endfor %}
-   {% endif %}
-   {% endblock %}
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__

@@ -1,2 +1,5 @@
+"""Units in python strings for matplotlib labels.
+
+"""
 from . __version__ import __version__
-from . sisetup import sisetup
+from . _sisetup import sisetup
