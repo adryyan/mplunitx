@@ -24,3 +24,6 @@ between or ``"[]"`` around the unit.
    installation
    reference
    tutorials
+
+
+.. _siunitx: https://ctan.org/pkg/siunitx?lang=en
