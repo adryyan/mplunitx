@@ -1,3 +1,6 @@
+# mplunitx
+-e .
+
 # Sphinx https://pypi.org/project/Sphinx/
 Sphinx
 
@@ -25,7 +28,7 @@ sphinx-argparse
 sphinx-autodoc-typehints
 
 # pandoc https://pypi.org/project/pandoc/
-pandoc
+pandoc >= 2.3
 
 # ipython https://pypi.org/project/ipython/
 ipython
