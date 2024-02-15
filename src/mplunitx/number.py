@@ -1,22 +1,17 @@
-"""Parsing of numbers.
+"""Helper classes / functions for the parsing of numbers.
 
 """
 
 
-class _number():
-    """
-    This class is used to parse number.
 
-    """
-
-    def __init__(self, number):
-        if isinstance(number, str):
-            self.tex_str = number
-        else:
-            try:
-                if int(number) == number:
-                    self.tex_str = str(int(number))
-                else:
-                    self.tex_str = str(number)
-            except ValueError:
-                raise ValueError("number must be a string or a number.")
+def _parse_number(number):
+    if isinstance(number, str):
+        return number
+    else:
+        try:
+            if int(number) == number:
+                return str(int(number))
+            else:
+                return str(number)
+        except ValueError:
+            raise ValueError("number must be a string or a number.")

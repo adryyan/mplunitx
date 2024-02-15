@@ -1,7 +1,7 @@
 """Hidden module for the sisetup class.
 
 """
-from . number import _number
+from . number import _parse_number
 from . unit import _parse_unit, _unit_kw
 
 from typing import Any, Dict, Literal
@@ -29,7 +29,7 @@ class sisetup():
     ----------
     declare_unit : dict
         Dictionary that stores units declared by the user.
-    unit_kw : _unit_kw
+    unit_kw : mplunitx.unit._unit_kw
         Instance of `mplunitx.unit._unit_kw` containing the unit
         formatting options.
 
@@ -165,20 +165,47 @@ class sisetup():
                              "label_unit_mode_options.")
 
 
-    def num(number: str) -> str:
-        """Returns the LaTeX representation of the given number.
+    def num(self, number: str) -> str:
+        """Dummy implementation.
+
+        Returns given string with ``"$"`` around.
 
         """
-        number = _number(number)
-        return "$" + number.tex_str + "$"
+        tex_str = _parse_number(number)
+        return "$" + tex_str + "$"
 
 
-    def unit(
-        self,
-        unit: str,
-        **unit_kw,
-    ) -> str:
-        """Returns the LaTeX representation of the given unit.
+    def unit(self, unit: str, **unit_kw) -> str:
+        """Returns the LaTeX code for the given unit.
+
+        Parameters
+        ----------
+        unit : str
+            The unit to be typeset as a string. Multiple units can be
+            combined using a semicolon ``";"`` inbetween. The units can
+            be combined with a prefix, e.g. ``"kilo.meter"`` and a
+            power, which can be specified by either a number or key
+            word again seperated with a dot ``"."``. The following
+            examples are equivalent: ``"kilo.meter.-2"``,
+            ``"per.kilo.meter.2"``, ``"per.kilo.meter.squared"``,
+            ``"per.square.kilo.meter"``.
+        **unit_kw
+            Keyword arguments to overwrite the options in
+            `sisetup.unit_kw`. The options are only overwritten for this
+            call.
+
+        Returns
+        -------
+        str
+            The LaTeX code for the given unit.
+
+        Examples
+        --------
+
+        >>> from mplunitx import sisetup
+        >>> si = sisetup()
+        >>> si.unit("per.square.kilo.meter")
+        '$\\mathrm{km}^{-2}$'
 
         """
         if not isinstance(unit, str):
@@ -266,14 +293,29 @@ class sisetup():
         return "$" + tex_str + "$"
 
 
-    def qty(
-        self,
-        number: str,
-        unit: str,
-        unit_kw: Dict[str, Any] = None,
-        **qty_kw,
-    ) -> str:
-        """Returns the LaTeX representation of the given quantity.
+    def qty(self, number: str, unit: str, unit_kw: Dict[str, Any] = None,
+            **qty_kw) -> str:
+        """Returns the LaTeX code for the given quantity.
+
+        Combines a number and a unit to a string containing the LaTeX
+        code.
+
+        Parameters
+        ----------
+        number : str
+            The number to be typeset passed to the `num` method.
+        unit : str
+            The unit to be typeset passed to the `unit` method.
+        unit_kw : dict, optional
+            Dictionary containing keyword arguments to temporarily
+            overwrite the options in `sisetup.unit_kw`.
+        **qty_kw
+            Not implemented yet.
+
+        Returns
+        -------
+        str
+            The LaTeX code for the given quantity.
 
         """
         number = self.num(number).replace("$", "")
@@ -292,8 +334,21 @@ class sisetup():
         return "$" + number + self.quantity_product + unit + "$"
 
 
-    def label(self, var: str, unit: str) -> str:
-        """Returns the LaTeX representation of the given label.
+    def label(self, var: str, unit: str, var_font_command="") -> str:
+        """Returns a string containing the LaTeX code of a figure label
+        constructed from a variable name und unit.
+
+        Parameters
+        ----------
+        var : str
+            The variable name.
+        unit : str
+            The unit to be typeset passed to the `unit` method.
+
+        Returns
+        -------
+        str
+            The LaTeX code for the given label.
 
         """
         if not isinstance(var, str):
@@ -302,6 +357,6 @@ class sisetup():
         unit = self.unit(unit).replace("$", "")
 
         if self.label_unit_mode == "/":
-            return var + r"$\;/\;" + unit + "$"
+            return "$" + var_font_command + "{" + var + r"}\;/\;" + unit + "$"
         elif self.label_unit_mode == "[]":
-            return var + r"\;[" + unit + r"]"
+            return "$" + var_font_command + "{" + var + r"}\;[" + unit + "]$"

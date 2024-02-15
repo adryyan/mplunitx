@@ -2,7 +2,7 @@
 
 This module provides dictionaries containing the available units and
 prefixes. And classes to handle the options for the unit formatting and
-parsing of the imput strings.
+parsing of the input strings.
 
 """
 import warnings
@@ -12,6 +12,44 @@ from typing import Any, Dict, Literal, Tuple
 
 class _unit_kw():
     """Handling of the options for the unit formatting.
+
+    This class is not intended to be used directly by the user.
+    However, the user can change the options in `sisetup.unit_kw` by
+    using the `update` method or setters.
+
+    Attributes
+    ----------
+    inter_unit_product : str, default=r"\\\,"
+        Character used to separate units.
+    per_mode : str, default="power"
+        Mode for typesetting units with negative power.
+        Must be one of ``{"power", "fraction", "symbol",
+        "single-symbol", "power-positive-first"}``.
+        ``"power"``: Units are typeset with positive and negative
+        powers. ``"fraction"``: Units are typeset as a fraction using
+        ``\\frac``. ``"symbol"``: Units are typeset with a character
+        between positive and negative powers (Default: ``"/"``, see
+        `per_symbol`). ``"single-symbol"``: Units are typeset like
+        ``"symbol"`` if there is only one unit with negative power.
+        Otherwise powers are used. ``"power-positive-first"``: Units are
+        typeset like ``"power"`` but positive powers are typeset left of
+        negative powers.
+    per_symbol : str, default="/"
+        Character between positive and negative powers when in
+        ``"symbol"`` or ``"single-symbol"`` mode.
+    bracket_unit_denominator : bool, default=True
+        If ``True`` and in ``"symbol"`` mode encloses the units to the
+        right of the symbol in brackets.
+    per_symbol_script_correction : str, default=r"\\\!"
+        If the character before ``per_symbol`` is a power, the space
+        between the power and the symbol is corrected using the given
+        string.
+    sticky_per : bool, default=False
+        Not implemented yet.
+    parse_units : bool, default=True
+        If ``False`` the input string is returned as is.
+    unit_font_command : str, default=r"\\\mathrm"
+        LaTeX command used to typeset units.
     
     """
     per_mode_options = ["power", "fraction", "symbol", "single-symbol",
@@ -151,7 +189,13 @@ class _unit_kw():
 
 
     def update(self, kw: Dict[str, Any]):
-        """Update the unit_kw options.
+        """Update the unit_kw options with a dictionary.
+
+        Parameters
+        ----------
+        kw : dict
+            Dictionary with the options to update. Any of the `_unit_kw`
+            attributes can be updated.
 
         """
         for k, v in kw.items():
@@ -370,6 +414,9 @@ def _parse_unit(
         raise TypeError("unit must be a string.")
     if len(unit) == 0:
         raise ValueError("unit must not be empty.")
+
+    if user_declared_units is None:
+        user_declared_units = {}
         
     unit = unit.split(".")
 
