@@ -21,6 +21,8 @@ rst_epilog = """
    :target: https://github.com/exp4-age/agepy/blob/main/LICENSE
 .. |docsshield| image:: https://readthedocs.org/projects/mplunitx/badge/?version=latest
    :target: https://mplunitx.readthedocs.io/en/latest/?badge=latest
+.. |pypi| image:: https://img.shields.io/pypi/v/mplunitx
+   :target: https://pypi.org/project/mplunitx/
 
 """.format(version, version)
 

@@ -1,7 +1,7 @@
 Welcome to the mplunitx documentation
 =====================================
 
-|versionshield| |licenseshield| |docsshield|
+|versionshield| |licenseshield| |docsshield| |pypi|
 
 *mplunitx* is a Python package heavily inspired by the LaTeX
 package `siunitx`_ intended to be used complementary with *matplotlib*.
