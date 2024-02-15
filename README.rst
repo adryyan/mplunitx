@@ -8,6 +8,10 @@ mplunitx
 .. image:: https://readthedocs.org/projects/mplunitx/badge/?version=latest
     :target: https://mplunitx.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
+.. image:: https://img.shields.io/pypi/v/:mplunitx.svg
+   :target: https://pypi.org/project/mplunitx
+   :alt: PyPI - Version
+
 
 *mplunitx* is a Python package heavily inspired by the LaTeX
 package `siunitx`_ intended to be used complementary with *matplotlib*.
