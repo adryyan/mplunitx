@@ -25,11 +25,14 @@ between or ``"[]"`` around the unit.
 Installation
 ------------
 
+Install with ::
+
+   pip install mplunitx
 
 Usage
 -----
 
-See documentation.
+See `documentation`_.
 
-
+.. _documentation: https://mplunitx.readthedocs.io/en/latest/
 .. _siunitx: https://ctan.org/pkg/siunitx?lang=en
