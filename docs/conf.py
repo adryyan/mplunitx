@@ -18,7 +18,7 @@ rst_epilog = """
 .. |versionshield| image:: https://img.shields.io/badge/version-{}-blue
    :target: https://img.shields.io/badge/version-{}-blue
 .. |licenseshield| image:: https://img.shields.io/badge/License-MIT-blue
-   :target: https://github.com/exp4-age/agepy/blob/main/LICENSE
+   :target: https://github.com/adryyan/mplunitx/blob/main/LICENSE
 .. |docsshield| image:: https://readthedocs.org/projects/mplunitx/badge/?version=latest
    :target: https://mplunitx.readthedocs.io/en/latest/?badge=latest
 .. |pypi| image:: https://img.shields.io/pypi/v/mplunitx

@@ -4,7 +4,7 @@ mplunitx
 .. image:: https://img.shields.io/badge/version-0.1.0-blue
    :target: https://img.shields.io/badge/version-0.1.0-blue
 .. image:: https://img.shields.io/badge/License-MIT-blue
-   :target: https://github.com/exp4-age/agepy/blob/main/LICENSE
+   :target: https://github.com/adryyan/mplunitx/blob/main/LICENSE
 .. image:: https://readthedocs.org/projects/mplunitx/badge/?version=latest
     :target: https://mplunitx.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
