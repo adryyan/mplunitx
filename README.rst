@@ -8,7 +8,7 @@ mplunitx
 .. image:: https://readthedocs.org/projects/mplunitx/badge/?version=latest
     :target: https://mplunitx.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
-.. image:: https://img.shields.io/pypi/v/:mplunitx.svg
+.. image:: https://img.shields.io/pypi/v/mplunitx
    :target: https://pypi.org/project/mplunitx
    :alt: PyPI - Version
 
